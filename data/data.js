@@ -21,6 +21,10 @@ window.JENNY={
   {
    "src": "photos/3.jpg",
    "cap": "يوم مش هنساه"
+  },
+  {
+   "src": "photos/1792037695881.jpg",
+   "cap": "llll"
   }
  ],
  "videos": [
@@ -110,5 +114,11 @@ window.JENNY={
    "by": "من قلبي"
   }
  ],
- "library": []
+ "library": [
+  {
+   "path": "photos/1792037695881.jpg",
+   "type": "image/jpeg",
+   "date": "2026-10-15"
+  }
+ ]
 };
