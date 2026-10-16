@@ -1,0 +1,181 @@
+@property --a{syntax:"<angle>";initial-value:0deg;inherits:false}
+@keyframes beat{50%{transform:scale(1.07)}}
+@keyframes bl{50%{opacity:0}}
+canvas#fx{z-index:60}
+.eye{background:radial-gradient(circle,#000 0 14%,#5b3a29 15% 30%,#c58b5d 31% 48%,#f6ebe0 49%)}
+
+/* envelope */
+#gate{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#5e1428,#10040a);text-align:center}
+#gate.bye{opacity:0;visibility:hidden;transition:opacity 1.8s,visibility 1.8s}
+#gate p{margin-top:3.4rem;color:#d9bfae}
+.env{position:relative;width:min(82vw,380px);aspect-ratio:3/2;perspective:900px;transition:transform 1.8s ease-in}
+.bye .env{transform:scale(1.5)}
+.env>*{position:absolute}
+.env .back{inset:0;background:#d9ac7c;border-radius:6px;box-shadow:0 30px 70px #000c,0 0 80px #e99aa822}
+.env .card{left:7%;right:7%;top:8%;bottom:8%;z-index:1;border-radius:4px;background:#fff7e6;display:grid;place-items:center;font:700 clamp(1.4rem,6vw,2rem) 'Aref Ruqaa';color:#9b2f4a;transition:transform 1.5s cubic-bezier(.2,.8,.2,1) .9s}
+.go .card{transform:translateY(-62%)}
+.bye .card{transform:translateY(-62%) scale(1.6);transition:transform 1.8s}
+.env .front{inset:0;z-index:2;background:linear-gradient(160deg,#e7c597,#d6a672);clip-path:polygon(0 100%,0 0,50% 66%,100% 0,100% 100%)}
+.env .flap{left:0;right:0;top:0;height:66%;z-index:3;transform-origin:top;background:linear-gradient(#cf9f6e,#e2bd8f);clip-path:polygon(0 0,100% 0,50% 100%);transition:transform 1s ease-in-out,z-index 0s .5s}
+.go .flap{transform:rotateX(180deg);z-index:0}
+.env .seal{left:50%;top:66%;translate:-50% -50%;z-index:4;width:70px;height:70px;border-radius:50%;border:0;cursor:pointer;background:radial-gradient(circle at 35% 30%,#d86a85,#8e1b3a 60%,#4e0b1f);color:#f8e6da;font:700 1.3rem 'Aref Ruqaa';box-shadow:0 0 0 5px #8e1b3a33,0 0 40px #b0325799,inset 0 -5px 10px #0005;animation:sb 1.8s infinite;transition:scale .5s,opacity .5s}
+@keyframes sb{50%{scale:1.1}}
+.go .seal{scale:0;opacity:0;animation:none}
+
+/* unrolling papyrus */
+.scr{width:min(100%,640px);margin:auto;filter:drop-shadow(0 25px 30px #000a)}
+.roll{display:block;height:34px;border-radius:17px;margin:0 -12px;position:relative;z-index:2;background:linear-gradient(#7a4b13,#c79a4f 20%,#fff0c0 50%,#d2a85a 75%,#6e430f)}
+.sheet{position:relative;max-height:0;overflow:hidden;margin:0 8px;transition:max-height 2.8s cubic-bezier(.3,.7,.2,1)}
+.scr.on .sheet{max-height:1600px}
+.sheet::before{content:"";position:absolute;inset:0;filter:url(#rough);background:radial-gradient(ellipse at 15% 8%,#f8ebbd,transparent 55%),radial-gradient(circle at 85% 70%,#b9904d66,transparent 30%),radial-gradient(ellipse at 90% 100%,#c9a766,transparent 55%),#ead9bd;box-shadow:inset 0 0 60px #7a4b1366}
+.sheet::after{content:"♥";position:absolute;bottom:16px;left:20px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:1.5rem;color:#f4d6cf;rotate:-12deg;background:radial-gradient(circle at 35% 30%,#d86a85,#8e1b3a 65%,#4e0b1f);box-shadow:0 3px 8px #0006}
+.in{position:relative;padding:2.4rem 1.8rem 6rem;white-space:pre-wrap;color:#4a3216;font:clamp(1.2rem,3.4vw,1.55rem)/2.2 'Aref Ruqaa',serif;background:repeating-linear-gradient(transparent 0 2.2em,#8a5a2222 2.2em calc(2.2em + 1px));min-height:260px}
+.typing::after{content:"▍";color:#a0522d;animation:bl 1s infinite}
+
+/* reels 1080x1920 */
+.reels{display:flex;gap:1.8rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:2.4rem 8vw 3rem}
+.reel{flex:0 0 min(68vw,270px);aspect-ratio:9/16;scroll-snap-align:center;position:relative;border-radius:30px;padding:4px;background:conic-gradient(from var(--a),#e99aa8,#dcbb8c,#d9a79a,#f1e3d0,#e99aa8);animation:spin 6s linear infinite;box-shadow:0 0 40px #e99aa855}
+@keyframes spin{to{--a:360deg}}
+.reel:nth-child(even){translate:0 26px;rotate:1.5deg}.reel:nth-child(odd){rotate:-1.5deg}
+.reel .v{width:100%;height:100%;border-radius:26px;overflow:hidden;background:#000 radial-gradient(circle,#5e1428,#000);display:grid;place-items:center}
+.reel .v::before{content:"♥";color:#e99aa8;font-size:2rem;position:absolute}
+.reel iframe{position:relative;width:100%;height:100%;border:0}
+.reel .cap{position:absolute;bottom:18px;right:-8px;z-index:2;background:#fff;color:#7a2438;font:700 1.05rem 'Aref Ruqaa';padding:.15rem .9rem;border-radius:99px;rotate:-5deg;pointer-events:none;box-shadow:0 4px 12px #0007}
+
+/* lyrics */
+.lyr{margin:5vh auto;max-width:720px;padding:0 6vw;text-align:center;font:700 clamp(1.5rem,4.6vw,2.3rem)/2 'Aref Ruqaa';color:#f6dccf;text-shadow:0 0 30px #e99aa8aa}
+.lyr:empty{display:none}
+.lyr::before{content:"♪ ♫ ♪";display:block;color:var(--gold);letter-spacing:.6em;font-size:1rem}
+.lyr span{display:block;opacity:0;filter:blur(8px);translate:0 12px;transition:1.6s}
+.lyr.on span{opacity:1;filter:none;translate:0}
+.lyr small{display:block;font:300 .95rem Tajawal;color:var(--gold);margin-top:.5rem}
+
+/* hanging cat */
+.cat{position:absolute;top:0;left:3vw;width:min(40vw,240px);z-index:6;overflow:visible;cursor:pointer}
+.sw{transform-origin:100px 0;animation:sw 4s ease-in-out infinite}
+@keyframes sw{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.ball{transform-origin:200px 0;animation:bs 2.6s ease-in-out infinite}
+@keyframes bs{0%,100%{transform:rotate(15deg)}50%{transform:rotate(-15deg)}}
+.paw{animation:pw 2.6s ease-in-out infinite}
+@keyframes pw{0%,100%{transform:translate(26px,-14px)}25%,75%{transform:none}}
+.tail{transform-origin:128px 190px;animation:tl 2s ease-in-out infinite}
+@keyframes tl{50%{transform:rotate(14deg)}}
+.meow{position:absolute;top:150px;left:6vw;z-index:7;background:#fff;color:#7a2438;padding:.3rem .9rem;border-radius:16px;font:700 1.05rem 'Aref Ruqaa';animation:mw 2s forwards}
+@keyframes mw{to{opacity:0;translate:0 -30px}}
+
+#secret{opacity:.35;cursor:pointer;margin-top:3rem;font-size:1.2rem;user-select:none}
+
+button.b:disabled{opacity:.35;transform:none;cursor:not-allowed;filter:grayscale(.7)}
+.ans.bad{color:#ffb3c1}.shake{animation:shk .5s}
+@keyframes shk{20%,60%{translate:-6px}40%,80%{translate:6px}}
+
+/* hanging polaroid line */
+#board{display:flex;flex-wrap:nowrap;justify-content:flex-start;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:3.4rem 8vw 2.4rem;background:linear-gradient(#ffffff66,#ffffff66) 0 26px/100% 2px no-repeat;background-attachment:local}
+.pol{flex:0 0 min(64vw,230px);scroll-snap-align:center;margin:0;padding:10px 10px 12px;border-radius:3px;transform-origin:50% -28px;animation:swing 5s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes swing{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+.pol::before{width:14px;height:40px;top:-32px;margin-left:-7px;border-radius:4px;background:linear-gradient(#ecb985,#c88c52);transform:none}
+.pol .shot{aspect-ratio:4/5;border-radius:2px}
+.pol figcaption{font:700 1.2rem 'Aref Ruqaa';text-align:center;padding-top:.7rem}
+
+/* story rings */
+.rings{display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center;padding:1rem 4vw}
+.ring{background:none;border:0;color:#fff;text-align:center;cursor:pointer;font:inherit;width:92px}
+.rg{display:block;width:84px;height:84px;border-radius:50%;padding:3px;margin:auto;background:conic-gradient(from var(--a),#e99aa8,#dcbb8c,#d9a79a,#e99aa8);animation:spin 5s linear infinite}
+.rg img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid var(--ink);background:#5e1428;display:block}
+.ring small{display:block;margin-top:.4rem;font-size:.85rem;color:#ead7c3}
+
+/* whatsapp-style story */
+#story{position:fixed;inset:0;z-index:45;display:none;background:#000d;backdrop-filter:blur(12px)}
+#story.on{display:grid;place-items:center}
+.sbox{position:relative;height:100dvh;aspect-ratio:9/16;max-width:100vw;background:#000;overflow:hidden}
+@media(min-width:600px){.sbox{height:94dvh;border-radius:20px;box-shadow:0 0 80px #e99aa855}}
+.sbox .fr,.sbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.bars{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:4px;z-index:3}
+.bars i{flex:1;height:3px;border-radius:3px;background:#fff5;overflow:hidden}.bars i.d{background:#fff}
+.bars b{display:block;height:100%;background:#fff;animation:fill linear forwards}
+@keyframes fill{from{width:0}to{width:100%}}
+.shead{position:absolute;top:22px;left:12px;right:12px;display:flex;gap:.6rem;align-items:center;z-index:3;color:#fff;text-shadow:0 1px 6px #000}
+.shead .av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#e99aa8,#d9a79a)}
+.shead div{flex:1;line-height:1.3}.shead small{display:block;opacity:.8;font-size:.8rem}
+.shead button{background:none;border:0;color:#fff;font-size:1.5rem;cursor:pointer}
+.tap{position:absolute;top:70px;bottom:90px;width:40%;z-index:2}.tap.n{left:0}.tap.p{right:0}
+.scap{position:absolute;bottom:76px;left:0;right:0;padding:2rem 1rem 1rem;z-index:3;text-align:center;color:#fff;font:700 1.5rem 'Aref Ruqaa';background:linear-gradient(transparent,#000a);pointer-events:none}
+.rep{position:absolute;bottom:14px;left:12px;right:12px;display:flex;gap:.5rem;z-index:4}
+.rep input{flex:1;border-radius:99px;border:1px solid #fff6;background:#0007;color:#fff;font:16px Tajawal;padding:.65rem 1rem}
+.rep button{width:44px;border:0;border-radius:50%;background:#25d366;color:#fff;font-size:1.1rem}
+
+/* cute pets */
+.pet{cursor:pointer;overflow:visible}
+.puppy{position:absolute;top:2vh;left:4vw;width:90px;z-index:2}
+.pony{display:block;margin:2.5rem auto 0;width:110px}
+.bob{transform-origin:50% 100%;animation:bobk 3s ease-in-out infinite}
+@keyframes bobk{50%{transform:rotate(-4deg) translateY(-3px)}}
+.tg{transform-origin:60px 78px;animation:pant .6s ease-in-out infinite alternate}
+@keyframes pant{to{transform:scaleY(1.3)}}
+.run{position:fixed;bottom:8px;left:-70px;z-index:30;font-size:2.4rem;pointer-events:none;scale:-1 1;animation:cross linear forwards,hop .45s ease-in-out infinite}
+.run.rev{left:auto;right:-70px;scale:1;animation-name:crossr,hop}
+@keyframes cross{to{translate:calc(100vw + 160px) 0}}
+@keyframes crossr{to{translate:calc(-100vw - 160px) 0}}
+@keyframes hop{50%{transform:translateY(-14px)}}
+.bub{position:fixed;z-index:65;transform:translate(-50%,0);background:#fff;color:#7a2438;padding:.3rem .9rem;border-radius:16px;font:700 1.05rem 'Aref Ruqaa';animation:bu 2s forwards;pointer-events:none}
+@keyframes bu{to{opacity:0;transform:translate(-50%,-34px)}}
+footer{position:relative}
+#gate{height:100dvh}
+@media(max-width:560px){section{padding:9vh 5vw}.cat{width:34vw}.puppy{width:72px}.pol{flex-basis:70vw}}
+
+/* admin */
+#adm{position:fixed;inset:0;z-index:70;background:#0d0820;display:none;flex-direction:column;height:100dvh}
+#adm.on{display:flex}
+#adm .top{display:flex;justify-content:space-between;align-items:center;padding:.8rem 1rem;border-bottom:1px solid #fff2;font:700 1.3rem 'Aref Ruqaa';color:var(--gold)}
+#adm .tabs{display:flex;gap:.4rem;overflow-x:auto;padding:.6rem 1rem;border-bottom:1px solid #fff1}
+#adm .tabs button{flex:0 0 auto;border:0;border-radius:99px;padding:.5rem 1rem;background:#ffffff14;color:#fff;font:inherit;cursor:pointer}
+#adm .tabs button.on{background:var(--rose);color:#3a0f1d}
+#adm .body{flex:1;overflow:auto;padding:1rem 1rem 3rem;max-width:760px;width:100%;margin:auto}
+#adm .foot{display:flex;gap:.5rem;padding:.8rem 1rem;border-top:1px solid #fff2;align-items:center;flex-wrap:wrap}
+#adm h3{font:700 1.3rem 'Aref Ruqaa';color:var(--gold);margin:1.4rem 0 .5rem}
+#adm .hint{color:#d9bfae;font-size:.92rem;line-height:1.6}
+#adm input[type=text],#adm input[type=password],#adm textarea{display:block;width:100%;min-height:0;border-radius:12px;border:1px solid #fff3;background:#00000055;color:#fff;font:16px Tajawal;padding:.65rem .8rem}
+#adm textarea{min-height:90px}
+#adm .rw{display:flex;gap:.5rem;margin:.5rem 0;align-items:center}
+#adm .card{background:#ffffff0d;border:1px solid #ffffff1c;border-radius:16px;padding:.8rem;margin:.7rem 0;display:flex;gap:.8rem;align-items:flex-start}
+#adm .card.col{flex-direction:column;align-items:stretch}
+#adm .card img{width:72px;height:72px;object-fit:cover;border-radius:10px;background:#2a0a14}
+#adm .card>div{flex:1;display:grid;gap:.5rem}
+#adm .opt{background:#00000033;border-radius:12px;padding:.6rem;display:grid;gap:.4rem;border:1px solid transparent}
+#adm .opt.ok{border-color:#7be0a0}
+#adm .chk{display:inline-flex;gap:.3rem;align-items:center;margin-inline-end:.8rem;font-size:.95rem}
+button.sm,label.sm{padding:.45rem 1rem;font-size:.95rem}
+#adm details{margin-top:1rem;color:#d9bfae}#adm details input{margin-top:.5rem}
+#adm .st{margin-inline-start:auto;color:var(--gold);font-size:.95rem}
+
+/* hero stage: cutout + orbiting photo cards */
+#hero{overflow:hidden;padding-top:6vh}
+.stage{--S:min(100vw,620px);--R:calc(var(--S)*.37);--w:calc(var(--S)*.21);position:relative;width:var(--S);aspect-ratio:1/1.02;margin:1.5rem auto 0}
+.stage.many{--w:calc(var(--S)*.15)}
+#hero .stage h1{position:absolute;inset:0;display:grid;place-items:end center;font-size:calc(var(--S)*.3);line-height:1.5;z-index:4;text-shadow:0 4px 30px #1a060e;pointer-events:none}
+.cut{position:absolute;left:50%;top:50%;height:84%;max-width:66%;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent);object-fit:contain;translate:-50% -50%;z-index:3;filter:drop-shadow(0 18px 30px #000a)}
+.orbit{position:absolute;inset:0;z-index:2;animation:orb 80s linear infinite}
+@keyframes orb{to{transform:rotate(360deg)}}
+.oc{position:absolute;left:50%;top:50%;width:var(--w);transform:translate(-50%,-50%) rotate(var(--ang)) translateY(calc(var(--R)*-1))}
+.oc .u{transform:rotate(calc(var(--ang)*-1))}
+.oc .cn{animation:orb 80s linear infinite reverse}
+.pc{background:#f6ebe0;padding:5% 5% 14%;border-radius:3px;box-shadow:0 10px 24px #000a;rotate:var(--t);cursor:pointer}
+.pc img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:#5e1428}
+#lb{position:fixed;inset:0;z-index:46;background:#000d;display:none;place-items:center;backdrop-filter:blur(10px);padding:5vh 5vw}
+#lb.on{display:grid}
+#lb figure{margin:0;max-width:min(92vw,520px);background:#f6ebe0;padding:12px 12px 16px;border-radius:4px;color:#5e1428;text-align:center}
+#lb img{width:100%;max-height:72vh;object-fit:contain;display:block}
+#lb figcaption{font:700 1.4rem 'Aref Ruqaa';padding-top:.7rem}
+/* eyes crossfade */
+.eye img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.6s}
+.eye img.on{opacity:1}
+/* floating reel cards */
+.fl{display:flex;flex-wrap:wrap;justify-content:center;gap:1.6rem 1.2rem;padding:1rem 0 2rem}
+.rc{position:relative;flex:0 0 min(41vw,200px);aspect-ratio:9/16;border-radius:24px;overflow:hidden;background:#1a060e;border:1px solid #f6ebe044;box-shadow:0 18px 40px #000a,0 0 0 4px #ffffff08;animation:fl 7s ease-in-out infinite;animation-delay:var(--d)}
+.rc:nth-child(2n){margin-top:2.4rem}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-14px) rotate(calc(var(--r)*-1))}}
+.rc video,.rc iframe,.rc .v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.rc::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,#000a);pointer-events:none}
+.rc .tag{position:absolute;top:10px;right:10px;z-index:2;background:#0007;padding:.05rem .6rem;border-radius:99px;font-size:.75rem}
+.rc .ui{position:absolute;left:10px;bottom:48px;z-index:2;display:grid;gap:10px;font-size:1.15rem;text-align:center;text-shadow:0 1px 6px #000}
+.rc .meta{position:absolute;right:12px;left:48px;bottom:14px;z-index:2;font:700 1.05rem 'Aref Ruqaa';text-shadow:0 1px 6px #000}
