@@ -40,7 +40,7 @@ $('#mute').onclick=()=>{song.paused?song.play():song.pause();$('#mute').style.op
 function typeLoop(){const el=$('#typed');let i=0,j=0,del=false;(function t(){const w=D.typed[i%D.typed.length]||'';el.textContent=w.slice(0,j);if(!del){if(j<w.length){j++;return setTimeout(t,90)}del=true;return setTimeout(t,1600)}if(j>0){j--;return setTimeout(t,40)}del=false;i++;setTimeout(t,300)})()}
 
 /* papyrus unrolls, then the letter writes itself */
-new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){o.disconnect();$('#scr').classList.add('on');setTimeout(()=>{const el=$('#letter');let k=0;el.classList.add('typing');(function t(){const L=D.letter;el.textContent=L.slice(0,k++);if(k<=L.length)setTimeout(t,L[k-1]==='\n'?380:55);else{el.classList.remove('typing');done=true}})()},1900)}},{threshold:.5}).observe($('#scr'));
+new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){o.disconnect();$('#scr').classList.add('on');setTimeout(()=>{const el=$('#letter');let k=0;el.classList.add('typing');(function t(){const L=D.letter;el.textContent=L.slice(0,k++);if(k<=L.length)setTimeout(t,L[k-1]==='\n'?250:Math.max(14,Math.min(55,22000/L.length)));else{el.classList.remove('typing');done=true}})()},1900)}},{threshold:.5}).observe($('#scr'));
 
 /* wishes → WhatsApp */
 $('#wish').value=localStorage.getItem('jenny-wish')||'';
