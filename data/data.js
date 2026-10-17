@@ -77,27 +77,27 @@ window.JENNY={
   {
    "src": "videos/v1.mp4",
    "poster": "videos/v1.jpg",
-   "cap": "ذكرى ✦"
+   "cap": "بحبك ✦"
   },
   {
    "src": "videos/v2.mp4",
    "poster": "videos/v2.jpg",
-   "cap": "لحظة حلوة"
+   "cap": "بحبك ✦"
   },
   {
    "src": "videos/v3.mp4",
    "poster": "videos/v3.jpg",
-   "cap": "فاكراها؟"
+   "cap": "بحبك ✦"
   },
   {
    "src": "videos/v4.mp4",
    "poster": "videos/v4.jpg",
-   "cap": "يوم جميل"
+   "cap": "بحبك ✦"
   },
   {
    "src": "videos/v5.mp4",
    "poster": "videos/v5.jpg",
-   "cap": "بحبك"
+   "cap": "بحبك ✦"
   }
  ],
  "questions": [
